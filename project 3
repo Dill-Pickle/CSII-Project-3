@@ -1,0 +1,159 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+const int SIZE = 8;
+struct Piece
+{
+	string name;
+	char color;
+};
+
+void setBoard(Piece board[SIZE][SIZE]);
+void showBoard(Piece board[SIZE][SIZE]);
+void setPiece();
+bool empty(Piece board[][SIZE], int, int);
+bool check(Piece board[][SIZE], int, int);
+int legal(Piece board[][SIZE], int, int, int, int);
+
+int main()
+{
+	Piece board[SIZE][SIZE];
+	int cx = 0, cy = 0;
+	int x = 4, y = 4;
+
+	setBoard(board);
+	showBoard(board);
+
+	cout << "Where would you like to place the Rook? (row/column): ";
+	cin >> cx >> cy;
+
+	if (empty(board, cx, cy))
+	{
+		do{
+			cout << "Where would you like to move it to? ";
+			cin >> x >> y;
+		} while (check(board, x, y) == false);
+	}
+
+	if (legal(board, cx, cy, x, y)) cout << "Yes Legal";
+	else cout << "Not legal";
+
+	
+}
+
+
+void setBoard(Piece board[SIZE][SIZE])
+{
+	//sets the board to all O
+	for (int i = 0; i < SIZE; i++)
+	{
+		for (int j = 0; j < SIZE; j++)
+		{
+			board[i][j].name = "O";
+		}
+	}
+
+	//white pawns
+	for (int j = 0; j < 2; j++)
+	{
+		for (int i = 0; i < SIZE; i++)
+		{
+			board[j][i].color = 'w';
+			board[1][i].name = "P";
+		}
+	}
+	//white pieces
+	board[0][0].name = "R";
+	board[0][1].name = "N";
+	board[0][2].name = "B";
+	board[0][3].name = "Q";
+	board[0][3].name = "K";
+	board[0][4].name = "B";
+	board[0][5].name = "N";
+	board[0][6].name = "B";
+	board[0][7].name = "R";
+
+	//black pawns
+	for (int j = 0; j < 2; j++)
+	{
+		for (int i = 0; i < SIZE; i++)
+		{
+			board[j][i].color = 'b';
+			board[6][i].name = "p";
+		}
+	}
+	//black pieces
+	board[7][0].name = "r";
+	board[7][1].name = "n";
+	board[7][2].name = "b";
+	board[7][3].name = "q";
+	board[7][3].name = "k";
+	board[7][4].name = "b";
+	board[7][5].name = "n";
+	board[7][6].name = "b";
+	board[7][7].name = "r";
+
+
+}
+
+
+void showBoard(Piece board[SIZE][SIZE])
+{
+
+	for (int i = 0; i <SIZE; i++)
+	{
+		for (int j = 0; j < SIZE; j++)
+		{
+			cout << board[i][j].name << " ";
+		}
+		cout << endl;
+	}
+
+	/*for (int i = 0; i <SIZE; i++)
+	{
+	for (int j = 0; j < SIZE; j++)
+	{
+	cout << board[i][j].color << " ";
+	}
+	cout<< endl;
+	}
+	*/
+
+}
+
+bool empty(Piece board[][SIZE], int cx, int cy)
+{
+	if (board[cx][cy].name == "O")
+	{
+		board[cx][cy].name = "R";
+		return true;
+	}
+	else return false;
+
+}
+
+
+bool check(Piece board[][SIZE], int x, int y)
+{
+	if (board[x][y].name == "O")
+	{
+		board[x][y].name = "X";
+		return true;
+	}
+	else return false;
+
+}
+
+
+int legal(Piece board[][SIZE], int cx, int cy, int x, int y)
+{
+	showBoard(board);
+
+	if ((cx == x) || (cy == y))
+		return 1;
+	else
+		return 0;
+
+
+}
