@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <time.h>
 using namespace std;
 
 const int SIZE = 8;
@@ -13,39 +14,36 @@ struct Piece
 void setBoard(Piece board[SIZE][SIZE]);
 void showBoard(Piece board[SIZE][SIZE]);
 void setPiece();
-bool empty(Piece board[][SIZE], int, int);
 bool check(Piece board[][SIZE], int, int);
+bool check12(Piece board[][SIZE], int, int);
 int legal(Piece board[][SIZE], int, int, int, int);
 
 int main()
 {
+	srand(time(0));
 	Piece board[SIZE][SIZE];
 	int cx = 0, cy = 0;
-	int x = 4, y = 4;
+	int x = 0, y = 0;
+	int player=1;
 
 	setBoard(board);
 	showBoard(board);
 
-	cout << "Where would you like to place the Rook? (row/column): ";
-	cin >> cx >> cy;
-
-	if (empty(board, cx, cy))
+	if (player % 2 != 0)
 	{
-		do{
-			cout << "Where would you like to move it to? ";
-			cin >> x >> y;
-		} while (check(board, x, y) == false);
+		do
+		{
+			cout << "You are the white pieces, Choose a square to move!";
+			cin >> cx >> cy;
+		} while (check(board, cx, cy));
 	}
-
-	if (legal(board, cx, cy, x, y)) cout << "Yes Legal";
-	else cout << "Not legal";
-
 	
 }
 
 
 void setBoard(Piece board[SIZE][SIZE])
 {
+
 	//sets the board to all O
 	for (int i = 0; i < SIZE; i++)
 	{
@@ -95,7 +93,6 @@ void setBoard(Piece board[SIZE][SIZE])
 	board[7][6].name = "n";
 	board[7][7].name = "r";
 
-
 }
 
 
@@ -111,31 +108,30 @@ void showBoard(Piece board[SIZE][SIZE])
 		cout << endl;
 	}
 
-	for (int i = 0; i <SIZE; i++)
+	/*for (int i = 0; i <SIZE; i++)
 	{
 	for (int j = 0; j < SIZE; j++)
 	{
 	cout << board[i][j].color << " ";
 	}
 	cout<< endl;
+	}*/
+	
+
+}
+
+bool check(Piece board[][SIZE], int cx, int cy)
+{
+	if (board[cx][cy].color == 'b' || board[cx][cy].name != "O")
+	{
+		return false;
 	}
 	
 
 }
 
-bool empty(Piece board[][SIZE], int cx, int cy)
-{
-	if (board[cx][cy].name == "O")
-	{
-		board[cx][cy].name = "R";
-		return true;
-	}
-	else return false;
 
-}
-
-
-bool check(Piece board[][SIZE], int x, int y)
+bool check12(Piece board[][SIZE], int x, int y)
 {
 	if (board[x][y].name == "O")
 	{
