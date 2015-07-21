@@ -13,10 +13,10 @@ struct Piece
 
 void setBoard(Piece board[SIZE][SIZE]);
 void showBoard(Piece board[SIZE][SIZE]);
-void setPiece();
+void wPieces(Piece board[][SIZE], int& ,int ,int ,int ,int);
+void bPieces(int&);
 bool check(Piece board[][SIZE], int, int);
-bool check12(Piece board[][SIZE], int, int);
-int legal(Piece board[][SIZE], int, int, int, int);
+
 
 int main()
 {
@@ -31,11 +31,7 @@ int main()
 
 	if (player % 2 != 0)
 	{
-		do
-		{
-			cout << "You are the white pieces, Choose a square to move!";
-			cin >> cx >> cy;
-		} while (check(board, cx, cy));
+		wPieces(board, player, cx, cy, x , y);
 	}
 	
 }
@@ -123,34 +119,19 @@ void showBoard(Piece board[SIZE][SIZE])
 bool check(Piece board[][SIZE], int cx, int cy)
 {
 	if (board[cx][cy].color == 'b' || board[cx][cy].name != "O")
-	{
 		return false;
-	}
 	
 
 }
 
+void wPieces(Piece board[SIZE][SIZE], int& player, int cx, int cy, int x, int y)
+{	
+		do
+		{
+			cout << "You are the white pieces, Choose a square to move!";
+			cin >> cx >> cy;
+		} while (check(board, cx, cy));
 
-bool check12(Piece board[][SIZE], int x, int y)
-{
-	if (board[x][y].name == "O")
-	{
-		board[x][y].name = "X";
-		return true;
-	}
-	else return false;
-
-}
-
-
-int legal(Piece board[][SIZE], int cx, int cy, int x, int y)
-{
-	showBoard(board);
-
-	if ((cx == x) || (cy == y))
-		return 1;
-	else
-		return 0;
-
-
+			cout << "Where would you like to move this piece?";
+			cin >> x >> y;
 }
