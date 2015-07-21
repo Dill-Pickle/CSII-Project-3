@@ -3,6 +3,7 @@
 using namespace std;
 
 const int SIZE = 8;
+
 struct Piece
 {
 	string name;
@@ -63,19 +64,19 @@ void setBoard(Piece board[SIZE][SIZE])
 			board[1][i].name = "P";
 		}
 	}
+
 	//white pieces
 	board[0][0].name = "R";
 	board[0][1].name = "N";
 	board[0][2].name = "B";
 	board[0][3].name = "Q";
-	board[0][3].name = "K";
-	board[0][4].name = "B";
-	board[0][5].name = "N";
-	board[0][6].name = "B";
+	board[0][4].name = "K";
+	board[0][5].name = "B";
+	board[0][6].name = "N";
 	board[0][7].name = "R";
 
 	//black pawns
-	for (int j = 0; j < 2; j++)
+	for (int j = 6; j < SIZE; j++)
 	{
 		for (int i = 0; i < SIZE; i++)
 		{
@@ -83,15 +84,15 @@ void setBoard(Piece board[SIZE][SIZE])
 			board[6][i].name = "p";
 		}
 	}
+
 	//black pieces
 	board[7][0].name = "r";
 	board[7][1].name = "n";
 	board[7][2].name = "b";
 	board[7][3].name = "q";
-	board[7][3].name = "k";
-	board[7][4].name = "b";
-	board[7][5].name = "n";
-	board[7][6].name = "b";
+	board[7][4].name = "k";
+	board[7][5].name = "b";
+	board[7][6].name = "n";
 	board[7][7].name = "r";
 
 
@@ -110,7 +111,7 @@ void showBoard(Piece board[SIZE][SIZE])
 		cout << endl;
 	}
 
-	/*for (int i = 0; i <SIZE; i++)
+	for (int i = 0; i <SIZE; i++)
 	{
 	for (int j = 0; j < SIZE; j++)
 	{
@@ -118,7 +119,7 @@ void showBoard(Piece board[SIZE][SIZE])
 	}
 	cout<< endl;
 	}
-	*/
+	
 
 }
 
